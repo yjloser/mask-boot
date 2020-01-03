@@ -36,6 +36,8 @@
 		<velocity.version>2.1</velocity.version>
 		<mail.version>1.4.7</mail.version>
 		<myexcel.version>3.2.4</myexcel.version>
+		<okhttp.version>4.3.0</okhttp.version>
+		<protostuff.version>1.6.2</protostuff.version>
 	</properties>
 
 	<dependencies>
@@ -85,6 +87,21 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>io.protostuff</groupId>
+				<artifactId>protostuff-core</artifactId>
+				<version>${protostuff.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.protostuff</groupId>
+				<artifactId>protostuff-runtime</artifactId>
+				<version>${protostuff.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${okhttp.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.github.liaochong</groupId>
 				<artifactId>myexcel</artifactId>
