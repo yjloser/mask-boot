@@ -1,0 +1,132 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage}; 
+import org.springframework.stereotype.Service;
+import org.maskframework.boot.tools.api.R;
+import com.alibaba.fastjson.JSONObject;
+import org.maskframework.boot.tools.api.ResultCode;
+import org.slf4j.Logger;
+import com.alibaba.fastjson.JSON;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired; 
+import static org.maskframework.boot.tools.constant.ToolsConstant.*;
+import org.maskframework.boot.tools.annotation.LoggerManage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+    /**
+	* 日志输出
+	*/
+    private final Logger logger = LoggerFactory.getLogger(${table.serviceImplName}.class);
+
+
+    /**
+	 * $!{table.comment}数据库操作
+	 */
+    @Autowired
+	private ${table.mapperName} ${table.entityPath}Mapper;
+
+	/**
+	 * $!{table.comment} 获取列表分页信息
+	 * @author ${author}
+	 * @param params 请求参数
+	 * @return 最终返回信息
+	 * @date ${date}
+	 */
+	@Override
+    @LoggerManage(FIELD_LIST)
+	public R list${entity}(JSONObject params) {
+    	//转换实体
+		${entity} item = JSON.toJavaObject(params, ${entity}.class);
+		//处理信息并设置返回分页信息
+		return new R(this.${table.entityPath}Mapper.select${entity}Page(new Page(params.getLongValue(FIELD_CURRENT),
+				params.getLongValue(FIELD_SIZE)), item));
+	}
+
+
+	/**
+	 * $!{table.comment} 获取单个信息
+	 * @author ${author}
+	 * @param id 实体主键
+	 * @return 最终返回信息
+	 * @date ${date}
+	 */
+	@Override
+    @LoggerManage(FIELD_GET)
+	public R get${entity}(String id) {
+		return new R(super.getById(id));
+	}
+
+
+	/**
+	 * $!{table.comment} 新增信息
+	 * @author ${author}
+	 * @param params 请求参数
+	 * @return 最终返回信息
+	 * @date ${date}
+	 */
+	@Override
+    @LoggerManage(FIELD_INSERT)
+	public R insert${entity}(JSONObject params) {
+		//转换实体
+		${entity} item = JSONObject.toJavaObject(params,${entity}.class);
+		if(super.save(item)){
+			return new R();
+		}
+		return new R(ResultCode.FAILURE);
+	}
+
+
+	/**
+	 * $!{table.comment} 根据条件更新信息
+	 * @author ${author}
+	 * @param params 请求参数
+	 * @return 最终返回信息
+	 * @date ${date}
+	 */
+	@Override
+    @LoggerManage(FIELD_UPDATE)
+	public R update${entity}(JSONObject params) {
+		//转换实体
+		${entity} item = JSONObject.toJavaObject(params,${entity}.class);
+		if(super.updateById(item)){
+			return new R();
+		}
+		return new R(ResultCode.FAILURE);
+	}
+
+
+	/**
+	 * $!{table.comment} 根据条件删除信息
+	 * @author ${author}
+	 * @param id 实体主键
+	 * @return 最终返回信息
+	 * @date ${date}
+	 */
+	@Override
+    @LoggerManage(FIELD_DELETE)
+	public R delete${entity}(String id) {
+		if (super.removeById(id)) {
+			return new R();
+		}
+		return new R(ResultCode.FAILURE);
+	}
+}
+#end

@@ -1,6 +1,6 @@
 package org.maskframework.boot.tools.api;
 
-import lombok.*;
+import lombok.Data;
 import org.maskframework.boot.tools.constant.ToolsConstant;
 import org.maskframework.boot.tools.utils.ObjectUtil;
 import org.springframework.lang.Nullable;
@@ -19,7 +19,6 @@ import java.util.Optional;
  * @since 2019/1/1
  */
 @Data
-@NoArgsConstructor
 public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,23 +41,36 @@ public class R<T> implements Serializable {
      */
     private String msg;
 
-    private R(IResultCode resultCode) {
+    public R(IResultCode resultCode) {
         this(resultCode, null, resultCode.getMessage());
     }
 
-    private R(IResultCode resultCode, String msg) {
+    public R(IResultCode resultCode, String msg) {
         this(resultCode, null, msg);
     }
 
-    private R(IResultCode resultCode, T data) {
+    public R(IResultCode resultCode, T data) {
         this(resultCode, data, resultCode.getMessage());
     }
 
-    private R(IResultCode resultCode, T data, String msg) {
+    public R(IResultCode resultCode, T data, String msg) {
         this(resultCode.getCode(), data, msg);
     }
 
-    private R(int code, T data, String msg) {
+    public R() {
+        this.code = 200;
+        this.msg = ResultCode.SUCCESS.message;
+        this.success = true;
+    }
+
+    public R(T data) {
+        this.code = 200;
+        this.data = data;
+        this.msg = ResultCode.SUCCESS.message;
+        this.success = true;
+    }
+
+    public R(int code, T data, String msg) {
         this.code = code;
         this.data = data;
         this.msg = msg;

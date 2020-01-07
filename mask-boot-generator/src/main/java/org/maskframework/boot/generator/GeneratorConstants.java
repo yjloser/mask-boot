@@ -323,6 +323,10 @@ public interface GeneratorConstants {
      */
     String FIELD_MODEL_FKEY_TEMPLET = "modelKeyTemplet";
     /**
+     * 自动创建数据库表转换实体
+     */
+    String TABLE_TO_ENTITY = "table/to/entity";
+    /**
      * dao模板
      */
     String FIELD_DAO_TEMPLET = "daoTemplet";
@@ -416,4 +420,9 @@ public interface GeneratorConstants {
      * 方法
      */
     String FIELD_METHOD = "method";
+
+    /**
+     * 生成
+     */
+    String FIELD_GENERATOR = "generator";
 }

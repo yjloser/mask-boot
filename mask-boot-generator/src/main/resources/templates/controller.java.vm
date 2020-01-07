@@ -1,0 +1,138 @@
+package ${package.Controller};
+
+import com.alibaba.fastjson.JSONObject;
+import ${package.Service}.${table.serviceName};
+import org.maskframework.boot.tools.annotation.AclManage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+
+import static org.maskframework.boot.tools.api.BaseRquestAndResponse.getRequest;
+import static org.maskframework.boot.tools.api.BaseRquestAndResponse.getResponse;
+import static org.maskframework.boot.tools.constant.ToolsConstant.*;
+import static org.maskframework.boot.tools.api.request.DesktopEndRequest.requestMessage;
+import static org.maskframework.boot.tools.api.response.DesktopEndResponse.write;
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+   /**
+   * 日志输出
+   */
+   private final Logger logger = LoggerFactory.getLogger(${table.controllerName}.class);
+
+   /**
+   * $!{table.comment} 服务类
+   */
+   @Autowired
+   private ${table.serviceName} i${entity}Service;
+
+   /**
+	* $!{table.comment}分页列表
+	*
+    * @author ${author}
+    * @date ${date}
+	*/
+	@AclManage("$!{table.comment}-列表")
+	@RequestMapping(FIELD_LIST)
+	public void list() {
+		//请求参数解析
+		JSONObject params = requestMessage(getRequest());
+		// 返回信息
+		write(this.i${entity}Service.list${entity}(params), getResponse());
+	}
+
+
+	/**
+	 * $!{table.comment}获取详情信息
+	 *
+	 * @author ${author}
+	 * @date ${date}
+	 */
+	@AclManage("$!{table.comment}-详情")
+	@RequestMapping(FIELD_GET)
+	public void get() {
+	    //请求参数解析
+		JSONObject params = requestMessage(getRequest());
+		// 返回信息
+		write(this.i${entity}Service.get${entity}(params.getString(FIELD_ID)), getResponse());
+	}
+
+
+	/**
+	 * $!{table.comment}新增操作
+	 *
+	 * @author ${author}
+	 * @date ${date}
+	 */
+	@AclManage("$!{table.comment}-新增")
+	@RequestMapping(FIELD_INSERT)
+	public void insert() {
+	    //请求参数解析
+		JSONObject params = requestMessage(getRequest());
+		// 返回信息
+		write(this.i${entity}Service.insert${entity}(params), getResponse());
+	}
+
+
+	/**
+	 * $!{table.comment}更新操作
+	 *
+	 * @author ${author}
+	 * @date ${date}
+	 */
+	@AclManage("$!{table.comment}-更新")
+	@RequestMapping(FIELD_UPDATE)
+	public void update() {
+	    //请求参数解析
+		JSONObject params = requestMessage(getRequest());
+		// 返回信息
+		write(this.i${entity}Service.update${entity}(params), getResponse());
+	}
+
+
+	/**
+	 * $!{table.comment}删除操作
+	 *
+	 * @author ${author}
+	 * @date ${date}
+	 */
+	@AclManage("$!{table.comment}-删除")
+	@RequestMapping(FIELD_DELETE)
+	public void delete() {
+	    //请求参数解析
+		JSONObject params = requestMessage(getRequest());
+		// 返回信息
+		write(this.i${entity}Service.delete${entity}(params.getString(FIELD_ID)), getResponse());
+	}
+}
+#end

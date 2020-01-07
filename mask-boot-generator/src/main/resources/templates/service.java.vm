@@ -1,0 +1,74 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import com.alibaba.fastjson.JSONObject;
+import org.maskframework.boot.tools.api.R;
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+
+    /**
+     * $!{table.comment} 获取列表分页信息
+     * @author ${author}
+     * @param params 请求参数
+     * @return 最终返回信息
+     * @date ${date}
+     */
+    R list${entity}(JSONObject params);
+
+
+
+    /**
+     * $!{table.comment} 获取详情信息
+     * @author ${author}
+     * @param id 实体主键
+     * @return 最终返回信息
+     * @date ${date}
+     */
+    R get${entity}(String id);
+
+
+
+    /**
+     * $!{table.comment} 新增信息
+     * @author ${author}
+     * @param params 请求参数
+     * @return 最终返回信息
+     * @date ${date}
+     */
+    R insert${entity}(JSONObject params);
+
+
+
+    /**
+     * $!{table.comment} 根据条件更新信息
+     * @author ${author}
+     * @param params 请求参数
+     * @return 最终返回信息
+     * @date ${date}
+     */
+    R update${entity}(JSONObject params);
+
+
+    /**
+     * $!{table.comment} 根据条件删除信息
+     * @author ${author}
+     * @param id 实体主键
+     * @return 最终返回信息
+     * @date ${date}
+     */
+    R delete${entity}(String id);
+}
+#end
