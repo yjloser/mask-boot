@@ -48,6 +48,45 @@ public interface ToolsConstant {
     int NUM_TWO = 2;
 
     /**
+     * 3
+     */
+    int NUM_THREE = 3;
+
+    /**
+     * 4
+     */
+    int NUM_FOUR = 4;
+
+    /**
+     * 5
+     */
+    int NUM_FIVE = 5;
+    /**
+     * 6
+     */
+    int NUM_SIX = 6;
+
+    /**
+     * 7
+     */
+    int NUM_SEVEN = 7;
+
+    /**
+     * 8
+     */
+    int NUM_EIGHT = 8;
+
+    /**
+     * 9
+     */
+    int NUM_NINE = 9;
+
+    /**
+     * 10
+     */
+    int NUM_TEN = 10;
+
+    /**
      * 30
      */
     int NUM_THIRTH = 30;
