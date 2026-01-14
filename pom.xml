@@ -36,7 +36,7 @@
 		<velocity.version>2.1</velocity.version>
 		<mail.version>1.4.7</mail.version>
 		<myexcel.version>3.2.4</myexcel.version>
-		<okhttp.version>4.3.0</okhttp.version>
+		<okhttp.version>4.9.2</okhttp.version>
 		<protostuff.version>1.6.2</protostuff.version>
 	</properties>
 
